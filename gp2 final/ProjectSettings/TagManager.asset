@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Water
   - ground
+  - Death
+  - Death2
+  - Win
+  - seaweed
   layers:
   - Default
   - TransparentFX

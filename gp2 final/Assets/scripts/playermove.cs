@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playermove : MonoBehaviour
 {
@@ -19,7 +21,6 @@ public class playermove : MonoBehaviour
     public enum PlayerStates{ Idle, Land, InWater}
     public PlayerStates currentState;
     
-    // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -60,6 +61,29 @@ public class playermove : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Death"))
+        {
+            SceneManager.LoadScene(0);
+        }
+        
+        if(other.gameObject.CompareTag("Death2"))
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        if(other.gameObject.CompareTag("Win"))
+        {
+            SceneManager.LoadScene(2);
+        }
+
+        if(other.gameObject.CompareTag("seaweed"))
+        {
+            landspeed = 2f;
         }
     }
 }

@@ -62,6 +62,8 @@ private void ChangeState(PlayerStates newState)
     {
         
         player.myRB.velocity = new Vector2(0, player.myRB.velocity.y);
+        player.myRB.gravityScale = 1f;
+        player.landspeed = 2f;
     }
 
     void Land()
@@ -69,7 +71,8 @@ private void ChangeState(PlayerStates newState)
         
         float horizontal = Input.GetAxisRaw("Horizontal");
         player.myRB.velocity = new Vector2(horizontal * player.landspeed, player.myRB.velocity.y);
-
+        player.myRB.gravityScale = 1f;
+        player.landspeed = 2f;
         if (Input.GetButtonDown("Jump") && player.IsGrounded())
         {
             player.myRB.velocity = new Vector2(player.myRB.velocity.x, player.jumpingforce);
@@ -79,7 +82,7 @@ private void ChangeState(PlayerStates newState)
 
     void InWater()
     {
-    
+        player.landspeed = 7f;
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         player.myRB.gravityScale = 0f;
