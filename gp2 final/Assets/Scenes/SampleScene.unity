@@ -2142,7 +2142,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3097,6 +3097,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &574690689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 574690690}
+  m_Layer: 0
+  m_Name: water check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &574690690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574690689}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.024420923, y: -0.10867148, z: 0}
+  m_LocalScale: {x: 1.2210182, y: 1.2210182, z: 1.2210182}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1500282458}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582912180
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,7 +3228,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4288,7 +4319,7 @@ Transform:
   m_GameObject: {fileID: 715360110}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.82, y: 27.6, z: -10}
+  m_LocalPosition: {x: -14.440001, y: 26.199999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5928,7 +5959,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -7573,7 +7604,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8105,7 +8136,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -9363,7 +9394,7 @@ Transform:
   m_GameObject: {fileID: 1475060176}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.82, y: 27.6, z: -10}
+  m_LocalPosition: {x: -14.440001, y: 26.199999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9675,6 +9706,7 @@ GameObject:
   - component: {fileID: 1500282461}
   - component: {fileID: 1500282460}
   - component: {fileID: 1500282459}
+  - component: {fileID: 1500282463}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -9691,10 +9723,11 @@ Transform:
   m_GameObject: {fileID: 1500282457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.81, y: 27.2, z: 0}
+  m_LocalPosition: {x: -14.43, y: 25.8, z: 0}
   m_LocalScale: {x: 0.8189886, y: 0.8189886, z: 0.8189886}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 574690690}
   - {fileID: 758544232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9711,13 +9744,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRB: {fileID: 1500282461}
+  waterCheck: {fileID: 574690690}
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
   groundcheck: {fileID: 758544232}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  speed: 2
+  waterspeed: 4
+  landspeed: 2
   jumpingforce: 5
   isfacingRight: 1
+  currentState: 0
 --- !u!70 &1500282460
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -9832,6 +9871,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1500282463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500282457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2370935cbe6e6904e9188b6079402385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1500282459}
+  currentState: 0
 --- !u!1 &1500595827
 GameObject:
   m_ObjectHideFlags: 0
@@ -10560,7 +10613,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -10578,7 +10631,6 @@ GameObject:
   - component: {fileID: 1646806165}
   - component: {fileID: 1646806166}
   - component: {fileID: 1646806167}
-  - component: {fileID: 1646806168}
   m_Layer: 0
   m_Name: Triangle (19)
   m_TagString: Untagged
@@ -10715,20 +10767,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1500282457}
   respawnPoint: {fileID: 542247364}
---- !u!114 &1646806168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646806163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964f5e1c5b5c4d04cb4c59fb2881addf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  respawnPoint: {fileID: 0}
 --- !u!1 &1648796514
 GameObject:
   m_ObjectHideFlags: 0
@@ -12860,7 +12898,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -13271,7 +13309,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -13655,7 +13693,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -13742,7 +13780,6 @@ SceneRoots:
   - {fileID: 715360114}
   - {fileID: 1500595828}
   - {fileID: 451131108}
-  - {fileID: 1500282458}
   - {fileID: 656731184}
   - {fileID: 1663255521}
   - {fileID: 1767537035}
@@ -13751,3 +13788,4 @@ SceneRoots:
   - {fileID: 1475060178}
   - {fileID: 542247364}
   - {fileID: 1692836972}
+  - {fileID: 1500282458}

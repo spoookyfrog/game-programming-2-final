@@ -5,13 +5,19 @@ using UnityEngine;
 public class playermove : MonoBehaviour
 {
     public Rigidbody2D myRB;
+    public Transform waterCheck;
+    public LayerMask waterLayer;
     public Transform groundcheck;
     public LayerMask groundLayer;
     bool grounded;
     private float horizontal;
-    public float speed = 2f;
+    private float vertical;
+    public float waterspeed = 12f;
+    public float landspeed = 2f;
     public float jumpingforce = 5f;
     public bool isfacingRight = true;
+    public enum PlayerStates{ Idle, Land, InWater}
+    public PlayerStates currentState;
     
     // Update is called once per frame
     void Update()
@@ -27,42 +33,33 @@ public class playermove : MonoBehaviour
         {
             myRB.velocity = new Vector2(myRB.velocity.x,myRB.velocity.y * 0.5f);
         }
+
         Flip();
     }
 
     void FixedUpdate()
     {
-        myRB.velocity = new Vector2(horizontal * speed, myRB.velocity.y);
+        myRB.velocity = new Vector2(horizontal * landspeed, myRB.velocity.y);
+
     }
 
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundLayer);
     }
-    void Flip()
-        {
-            if (isfacingRight && horizontal < 0f || !isfacingRight && horizontal >0f)
-            {
-                isfacingRight = !isfacingRight;
-                Vector3 localScale = transform.localScale;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-            }
-        }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public bool IsInWater()
     {
-        if (other.gameObject.CompareTag("ground"))
-        {
-            grounded = true;
-        }
+        return Physics2D.OverlapCircle(waterCheck.position, 0.2f, waterLayer);
     }
-
-    private void OnCollisionExit2D(Collision2D other)
+    void Flip()
     {
-        if (other.gameObject.CompareTag("ground"))
+        if (isfacingRight && horizontal < 0f || !isfacingRight && horizontal >0f)
         {
-            grounded = false;
+            isfacingRight = !isfacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 }
