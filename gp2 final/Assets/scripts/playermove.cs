@@ -68,22 +68,17 @@ public class playermove : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Death"))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         
         if(other.gameObject.CompareTag("Death2"))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
 
         if(other.gameObject.CompareTag("Win"))
         {
-            SceneManager.LoadScene(2);
-        }
-
-        if(other.gameObject.CompareTag("seaweed"))
-        {
-            landspeed = 2f;
+            SceneManager.LoadScene(3);
         }
     }
 }
